@@ -1,0 +1,197 @@
+################################################################################
+## This is a complete configuration file for using emporia-vue-local-extended ##
+################################################################################
+substitutions:
+  name: energy_monitor
+  friendly_name: "Energy Monitor"
+  vue_variant: vue2  # Can be either vue2 or vue3, this only effects Phase A and C current measurements on the vue3
+
+  phase_a_voltage_calibration: 0.022
+  phase_b_voltage_calibration: 0.022
+  phase_c_voltage_calibration: 0.022
+  # 0.022 is used as the default as starting point but may need adjusted to ensure accuracy
+  # To calculate new calibration value use the formula <in-use calibration value> * <accurate voltage> / <reporting voltage>
+
+  # These set the wire colors the for voltage/phase measurements
+  red_wire: phase_a
+  black_wire: phase_b
+  blue_wire: phase_c
+
+  sensor_update_rate: 500ms  # minimum is 240ms (limited by the Atmega)
+  energy_update_rate: 60s    # should be at least 2x the sensor_update_rate
+
+  # Configuration for each CT clamp
+  ct_a:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_b:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_c:  {disable:  "true", backfeed: "false", phase: c,  clamp_on: phase_c}
+  ct_1:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
+  ct_2:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
+  ct_3:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_4:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_5:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_6:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_7:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_8:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_9:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_10: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_11: {disable:  "true", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_12: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_13: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_14: {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
+  ct_15: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
+  ct_16: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+
+
+
+packages:
+  emporia_vue_extended:
+    url: https://github.com/Legot/emporia-vue-local-extended
+    files: [vue_base.yaml]
+
+
+# packages:
+#   - !include common/devices/emporia-vue-local-extended/vue_base.yaml
+##################################################################
+api:
+  encryption:
+    key: MPX7A7mLhl9cHbVeBws9wJsClCNkuPW0OAgHTj5U/6f=   # generate your own key here https://esphome.io/components/api/#configuration-variables
+##################################################################
+
+logger:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "${friendly_name} Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+
+time:
+####################
+  - platform: sntp
+    id: my_time
+    servers:
+      - homeassistant.local # highly recommend installing the Chrony Add-on to Homeassistant for NTP service
+      - pool.ntp.org
+####################
+#  - platform: homeassistant  # alternate configuration to use the Homeassistant API as a time source, it can be less accurate.
+#    id: my_time
+####################
+    on_time_sync: 
+      then:
+      - logger.log: "Time Synchronized Successfully"
+      - binary_sensor.template.publish:
+          id: time_synchronized
+          state: ON
+      - delay: 10s
+      - binary_sensor.template.publish:
+          id: time_synchronized
+          state: OFF
+
+binary_sensor:
+  - platform: template
+    name: "Time Synchronized"
+    id: time_synchronized
+    entity_category: diagnostic
+
+button:
+  - platform: safe_mode
+    name: "Safe Mode Restart"
+
+##################################################################
+esphome:
+  name: "${name}"
+  friendly_name: ${friendly_name}
+  area: "Electrical Panel"
+#################################
+  devices:
+    - id: grid_service
+      name: "Main Electrical Service"
+      area_id: electrical_panel
+
+    - id: cir1
+      name: "Kitchen Range 240V Circuit"
+      area_id: kitchen
+
+    - id: cir2
+      name: "Laundry Dryer 240V Circuit"
+      area_id: laundry_room
+
+    - id: cir3
+      name: "Kitchen Microwave Circuit"
+      area_id: kitchen
+
+    - id: cir4
+      name: "Kitchen Undersink GFCI Circuit"
+      area_id: kitchen
+
+    - id: cir5
+      name: "Kitchen GFCI Circuit"
+      area_id: kitchen
+
+    - id: cir6
+      name: "Kitchen Circuit"
+      area_id: kitchen
+
+    - id: cir7
+      name: "HVAC Air Handler, Hallway Cabinet Circuit"
+      area_id: upstairs_hallway
+
+    - id: cir8
+      name: "Kitchen Fridge Circuit"
+      area_id: kitchen
+
+    - id: cir9
+      name: "Laundry Washer Circuit"
+      area_id: laundry_room
+
+    - id: cir10
+      name: "Mini Split 240V Circuit Leg B"
+      area_id: guest_bedroom
+
+    - id: cir11
+      name: "CT11 Unused"
+      area_id: electrical_panel
+    
+    - id: cir12
+      name: "Guest Bedroom Circuit"
+      area_id: guest_bedroom
+    
+    - id: cir13
+      name: "Mini Split 240V Circuit Leg A"
+      area_id: guest_bedroom
+    
+    - id: cir14
+      name: "Side Yard 240V Circuit"
+      area_id: side_yard
+    
+    - id: cir15
+      name: "Welder 240V Circuit Leg A"
+      area_id: garage
+    
+    - id: cir16
+      name: "Welder 240V Circuit Leg B"
+      area_id: garage
+#################################
+  areas:
+    - id: electrical_panel
+      name: "Electrical Panel"
+    - id: kitchen
+      name: "Kitchen"
+    - id: laundry_room
+      name: "Laundry Room"
+    - id: guest_bedroom
+      name: "Guest Bedroom"
+    - id: upstairs_hallway
+      name: "Upstairs Hallway"
+    - id: garage
+      name: "Garage"
+    - id: side_yard
+      name: "Side Yard"
