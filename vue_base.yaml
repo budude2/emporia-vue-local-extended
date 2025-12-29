@@ -25,6 +25,8 @@ packages:
   - !include sensors/inputs.yaml
 
 esphome:
+  includes:
+    - phase_config.h # this is the function set that selects voltage based on phase configuration
   on_boot: #beeps the buzzer
     then:
       - rtttl.play: 'two_short:d=4,o=5,b=100:16e6,16e6'
