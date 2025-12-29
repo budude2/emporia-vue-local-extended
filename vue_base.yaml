@@ -12,7 +12,7 @@ external_components:
       url: https://github.com/Legot/emporia-vue-local-extended
       ref: main
     components:
-      - emporia_vue_extended
+      - phase_config
 
 phase_config:
 
