@@ -20,16 +20,16 @@ CONFIGSCHEMA = cv.Schema(
         cv.GenerateID(): cv.declare_id(PhaseConfig),
 
         # Keep overall required as a reliable fallback
-        cv.Required(CONF_OVERALL_VOLTAGE): cv.useid(sensor.Sensor),
+        cv.Required(CONF_OVERALL_VOLTAGE): cv.use_id(sensor.Sensor),
 
         # Others optional; if omitted, fallback behavior uses overall or NAN
-        cv.Optional(CONFPHASE_AB_VOLTAGE): cv.useid(sensor.Sensor),
-        cv.Optional(CONFPHASE_BC_VOLTAGE): cv.useid(sensor.Sensor),
-        cv.Optional(CONFPHASE_AC_VOLTAGE): cv.useid(sensor.Sensor),
+        cv.Optional(CONFPHASE_AB_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONFPHASE_BC_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONFPHASE_AC_VOLTAGE): cv.use_id(sensor.Sensor),
 
-        cv.Optional(CONF_PHASE_A_VOLTAGE): cv.useid(sensor.Sensor),
-        cv.Optional(CONF_PHASE_B_VOLTAGE): cv.useid(sensor.Sensor),
-        cv.Optional(CONF_PHASE_C_VOLTAGE): cv.useid(sensor.Sensor),
+        cv.Optional(CONF_PHASE_A_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONF_PHASE_B_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONF_PHASE_C_VOLTAGE): cv.use_id(sensor.Sensor),
     }
 ).extend(cv.COMPONENT_SCHEMA)
 
