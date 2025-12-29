@@ -45,26 +45,26 @@ async def to_code(config):
     overall = await cg.get_variable(config[CONF_OVERALL_VOLTAGE])
     cg.add(var.set_overall_voltage(overall))
 
-    if CONFPHASEABVOLTAGE in config:
+    if CONF_PHASE_AB_VOLTAGE in config:
         ab = await cg.get_variable(config[CONFPHASE_AB_VOLTAGE])
         cg.add(var.set_phase_a_b_voltage(ab))
 
-    if CONFPHASEBCVOLTAGE in config:
+    if CONF_PHASE_BC_VOLTAGE in config:
         bc = await cg.get_variable(config[CONFPHASE_BC_VOLTAGE])
         cg.add(var.set_phase_b_c_voltage(bc))
 
-    if CONFPHASEACVOLTAGE in config:
+    if CONF_PHASE_AC_VOLTAGE in config:
         ac = await cg.get_variable(config[CONFPHASE_AC_VOLTAGE])
         cg.add(var.set_phase_a_c_voltage(ac))
 
-    if CONFPHASEAVOLTAGE in config:
+    if CONF_PHASE_A_VOLTAGE in config:
         a = await cg.get_variable(config[CONF_PHASE_A_VOLTAGE])
         cg.add(var.set_phase_a_voltage(a))
 
-    if CONFPHASEBVOLTAGE in config:
+    if CONF_PHASE_B_VOLTAGE in config:
         b = await cg.get_variable(config[CONF_PHASE_B_VOLTAGE])
         cg.add(var.set_phase_b_voltage(b))
 
-    if CONFPHASECVOLTAGE in config:
+    if CONF_PHASE_C_VOLTAGE in config:
         c = await cg.get_variable(config[CONF_PHASE_C_VOLTAGE])
         cg.add(var.set_phase_c_voltage(c))
