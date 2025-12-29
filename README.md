@@ -119,12 +119,15 @@ V_{\text{phase}} * A_{\text{apparent}} = \text{VA}
 \frac{W}{\text{VA}} = \text{PF}
 ```
 ## Notes
-The bottleneck on update_rate is always going to be your HomeAssistant host and database preformance. I've been running two of these devices doing all of these calculations at a 500ms update rate for over 2 years now with no meaningful issues.
+The bottleneck on update_rate is always going to be your HomeAssistant host and database preformance. I've been running two of these devices doing all of these calculations at a 500ms update rate for over 2 years now with no issues.
 - My Homeassistant server is a Proxmox VM running at <20% CPU utilization on 4 Intel i5 cores. YMMV
+
 The default homeassistant database isn't designed for time series data (despite heavy optimization), but the recorder is. I highly recommend setting up a real Time Searies Database (either as a homeassistant add-on or standalone/VM)
 - I use the InfluxDB integration to send data to a VictoriaMetrics Container and visualize using Grafana
 - InfluxDB v2 also works well, but I moved away due to liscensing concerns with the free version.
+
 NTP time isn't neccessary, because of the Homeassistant API, but in my experience the NTP timesource is far more reliable
 - for some reason I was seeing the HA API time (which is derived from NTP) drift by up to 5 seconds per day. I think the API only syncs time on boot of the ESP
 - The Chrony Homeassistant Add-on will let you set up an NTP server on your HA host, which allows the ESP to sync every 10-15 minutes.
+
 Depending on what you're doing with your Daily Energy numbers, it may be useful to go as fast as a 1s update rate.
