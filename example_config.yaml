@@ -48,9 +48,6 @@ packages:
     url: https://github.com/Legot/emporia-vue-local-extended
     files: [vue_base.yaml]
 
-
-# packages:
-#   - !include common/devices/emporia-vue-local-extended/vue_base.yaml
 ##################################################################
 api:
   encryption:
