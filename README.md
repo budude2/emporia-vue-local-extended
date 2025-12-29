@@ -3,18 +3,15 @@
 This is a more advanced and much more easily configured Emporia Vue ESPHome Template.
 This is really made for users at the tail ends of the power monitoring bell curve.
 
-## Original Project
+## Just copy over the example_config.yaml into your esphome dashboard and all of the required external components and sensor setups are pulled in and set up automatically.
+
+### Original Project
 The original project (which provides the entirety of the underlying esphome component) here: 
 - [Emporia Vue Local GitHub](https://github.com/emporia-vue-local)
 - [Project Documentation](https://emporia-vue-local.github.io/docs/tutorial/intro/)
 
-## What this does for you
-
-I didn't think that the original configuration was anything close to what the hardware was capable of, so I built my own configuration with some neat features:
-
 ### Simplified Configuration!
-  - Just include the package in your ESPHome and set up your sensors (and optionally, your areas)
-  - Automatically adjusts for 1-3 phase installations
+  - Automatically adjusts for 1-3 phase installations.
   - Automatically adjusts calculations based on your configured wiring layout
 
 ### More Measurements!
@@ -35,7 +32,7 @@ And from those we calculate extended measurements using lambdas on the ESP32
 - Also uses lots of lambdas
 
 ## Configuration
-The configuration relies mostly on substitutions. All options are needed, and if you mess something up it most likely will not compile/
+The configuration relies mostly on substitutions. All options are needed, and if you mess something up it most likely will not compile.
 ```yaml
 substitutions:
   name: em02
@@ -103,7 +100,7 @@ Each clamp must be configured from the following options:
 | `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement               |
 | `clamp_on` | `phase_a`, `phase_b`, `phase_c` | Specifies the physical phase where the clamp is actually installed (i.e. a split phase measurement across A and B with the clamp on phase_b    |
 
-## Some Math
+## Some Math used for the sensors
 #### Real Power
 ```math
 \left(\frac{W_{\text{measured}}}{V_{\text{phase}}}\right)\times V_{\text{crossphase}} = W_{\text{actual}}
