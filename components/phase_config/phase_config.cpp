@@ -1,20 +1,20 @@
-#include "phaseconfig.h"
+#include "phase_config.h"
 
 namespace esphome {
-namespace phaseconfig {
+namespace phase_config {
 
-PhaseConfig *gphaseconfig = nullptr;
+PhaseConfig *g_phase_config = nullptr;
 
 void PhaseConfig::setup() {
-  gphaseconfig = this;
+  g_phase_config = this;
 }
 
 // Normalize a phase string: lowercase, trim whitespace, default to "a" if empty.
-std::string PhaseConfig::normalizephase(std::string phase) {
+std::string PhaseConfig::normalize_phase(std::string phase) {
   for (auto &ch : phase)
-    ch = staticcast<char>(std::tolower(staticcast<unsigned char>(ch)));
+    ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
 
-  phase.erase(std::removeif(phase.begin(), phase.end(),
+  phase.erase(std::remove_if(phase.begin(), phase.end(),
                              [](unsigned charsspace(c); }),
               phase.end());
 
@@ -22,18 +22,33 @@ std::string PhaseConfig::normalizephase(std::string phase) {
   return phase;
 }
 
-float PhaseConfig::voltagebyphase(const std::string &phaseraw) const {
-  const std::string phase = normalizephase(phaseraw);
+float PhaseConfig::voltage_by_phase(const std::string &phase_raw) const {
+  const std::string phase = normalize_phase(phase_raw);
 
-  if (phase == "ab" && phaseabvoltage != nullptr) return phaseabvoltage->state;
-  if (phase == "bc" && phasebcvoltage != nullptr) return phasebcvoltage->state;
-  if (phase == "ac" && phaseacvoltage¨C196Ca¨C197Cvoltage¨C198Ca¨C199C != nullptr) return phase¨C200Cvoltage¨C201Cb¨C202C != nullptr) return phase¨C203Cvoltage¨C204Cc¨C205C != nullptr) return phase¨C206Cvoltage¨C207Cvoltage¨C208Cvoltage¨C209Cphase¨C210Craw) const {
-  const std::string phase = normalizephase(phaseraw);
+  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
+  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
+  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_a_c_voltage_->state;
+
+  if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
+  if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
+  if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
+
+  if (overall_voltage_ != nullptr ) return overall_voltage_->state;
+  return NAN;
+}
+
+
+float PhaseConfig::single_phase_voltage(const std::string &phase_raw) const {
+  const std::string phase = normalize_phase(phase_raw);
   const char c = phase.empty() ? 'a' : phase[0];
+  
+  if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
+  if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
+  if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
 
-  if (c == 'a' && phaseavoltage != nullptr) return phaseavoltage->state;
-  if (c == 'b' && phasebvoltage != nullptr) return phasebvoltage->state;
-  if (c == 'c' && phasecvoltage != nullptr) return phasecvoltage->state;
+  if (overall_voltage_ != nullptr ) return overall_voltage_->state;
+  return NAN;
+}
 
-  if (overallvoltage¨C222Cvoltage¨C223Cconfig
+} // namespace phase_config
 }  // namespace esphome
