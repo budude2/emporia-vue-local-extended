@@ -46,15 +46,15 @@ async def to_code(config):
     cg.add(var.set_overall_voltage(overall))
 
     if CONF_PHASE_AB_VOLTAGE in config:
-        ab = await cg.get_variable(config[CONFPHASE_AB_VOLTAGE])
+        ab = await cg.get_variable(config[CONF_PHASE_AB_VOLTAGE])
         cg.add(var.set_phase_a_b_voltage(ab))
 
     if CONF_PHASE_BC_VOLTAGE in config:
-        bc = await cg.get_variable(config[CONFPHASE_BC_VOLTAGE])
+        bc = await cg.get_variable(config[CONF_PHASE_BC_VOLTAGE])
         cg.add(var.set_phase_b_c_voltage(bc))
 
     if CONF_PHASE_AC_VOLTAGE in config:
-        ac = await cg.get_variable(config[CONFPHASE_AC_VOLTAGE])
+        ac = await cg.get_variable(config[CONF_PHASE_AC_VOLTAGE])
         cg.add(var.set_phase_a_c_voltage(ac))
 
     if CONF_PHASE_A_VOLTAGE in config:
