@@ -7,11 +7,8 @@ external_components:
     components:
       - emporia_vue
 
-  - source:
-      type: git
-      url: https://github.com/Legot/emporia-vue-local-extended
-    components:
-      - emporia_vue_extended
+  - source: github://Legot/emporia-vue-local-extended@main
+    files: [sensors/phase_config.h]   # only the header you need
 
 packages:
   - !include sensors/apparent_current.yaml
