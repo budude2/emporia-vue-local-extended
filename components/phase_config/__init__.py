@@ -23,9 +23,9 @@ CONFIGSCHEMA = cv.Schema(
         cv.Required(CONF_OVERALL_VOLTAGE): cv.use_id(sensor.Sensor),
 
         # Others optional; if omitted, fallback behavior uses overall or NAN
-        cv.Optional(CONFPHASE_AB_VOLTAGE): cv.use_id(sensor.Sensor),
-        cv.Optional(CONFPHASE_BC_VOLTAGE): cv.use_id(sensor.Sensor),
-        cv.Optional(CONFPHASE_AC_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONF_PHASE_AB_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONF_PHASE_BC_VOLTAGE): cv.use_id(sensor.Sensor),
+        cv.Optional(CONF_PHASE_AC_VOLTAGE): cv.use_id(sensor.Sensor),
 
         cv.Optional(CONF_PHASE_A_VOLTAGE): cv.use_id(sensor.Sensor),
         cv.Optional(CONF_PHASE_B_VOLTAGE): cv.use_id(sensor.Sensor),
