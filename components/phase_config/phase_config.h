@@ -1,42 +1,70 @@
-// phase_config.h — helper for mapping CT phase strings to the correct voltage sensor
+ // phaseconfig.h — helper for mapping CT phase strings to the correct voltage sensor
 #pragma once
-#include "esphome.h"
+
+#include "esphome/core/component.h"
+#include "esphome/components/sensor/sensor.h"
+#include "esphome/core/helpers.h"  // for NAN
+
 #include <string>
 #include <algorithm>
 #include <cctype>
 
-// Normalize a phase string: lowercase, trim whitespace, default to "a" if empty.
-inline std::string normalize_phase(std::string phase) {
-  for (auto &ch : phase) ch = std::tolower((unsigned char)ch);
-  phase.erase(std::remove_if(phase.begin(), phase.end(), [](unsigned char c){ return std::isspace(c); }), phase.end());
-  if (phase.empty()) phase = "a";
-  return phase;
+namespace esphome {
+namespace phaseconfig {
+
+class PhaseConfig : public Component {
+public:
+  void setup() override;
+
+  // setters wired from YAML via init.py
+  void setoverallvoltage(sensor::Sensor s) { overallvoltage = s; }
+  void setphaseabvoltage(sensor::Sensor s) { phaseabvoltage = s; }
+  void setphasebcvoltage(sensor::Sensor s) { phasebcvoltage = s; }
+  void setphaseacvoltage(sensor::Sensor s) { phaseacvoltage = s; }
+  void setphaseavoltage(sensor::Sensor s) { phaseavoltage = s; }
+  void setphasebvoltage(sensor::Sensor s) { phasebvoltage = s; }
+  void setphasecvoltage(sensor::Sensor s) { phasecvoltage = s; }
+
+  float voltagebyphase(const std::string &phaseraw) const;
+  float singlephasevoltage(const std::string &phaseraw) const;
+
+private:
+  static std::string normalizephase(std::string phase);
+
+  sensor::Sensor overallvoltage{nullptr};
+  sensor::Sensor phaseabvoltage{nullptr};
+  sensor::Sensor phasebcvoltage{nullptr};
+  sensor::Sensor phaseacvoltage{nullptr};
+  sensor::Sensor phaseavoltage{nullptr};
+  sensor::Sensor phasebvoltage{nullptr};
+  sensor::Sensor phasecvoltage{nullptr};
+};
+
+// Singleton pointer set in setup()
+extern PhaseConfig *gphaseconfig;
+
+}  // namespace phaseconfig
+}  // namespace esphome
+
+// ---- Public functions used by lambdas (unchanged signatures) ----
+
+// Map phase string to the configured sensor's voltage.
+// Returns NAN if not configured.
+inline float voltagebyphase(const std::string &phaseraw) {
+  if (esphome::phaseconfig::gphaseconfig == nullptr) return NAN;
+  return esphome::phaseconfig::gphaseconfig->voltagebyphase(phaseraw);
 }
 
-inline float voltage_by_phase(const std::string &phase_raw) {
-  const std::string phase = normalize_phase(phase_raw);
-  if (phase == "ab") return id(phase_a_b_voltage).state;
-  if (phase == "bc") return id(phase_b_c_voltage).state;
-  if (phase == "ac") return id(phase_a_c_voltage).state;
-  if (phase == "a") return id(phase_a_voltage).state;
-  if (phase == "b") return id(phase_b_voltage).state;
-  if (phase == "c") return id(phase_c_voltage).state;
-  return id(overall_voltage).state;
+// Return the single-phase voltage based on first letter of (normalized) phase string.
+inline float singlephasevoltage(const std::string &phaseraw) {
+  if (esphome::phaseconfig::gphaseconfig == nullptr) return NAN;
+  return esphome::phaseconfig::gphaseconfig->singlephasevoltage(phaseraw);
 }
 
-// Return the single-phase voltage based on the first letter of the (normalized) phase string.
-inline float single_phase_voltage(const std::string &phase_raw) {
-  const std::string phase = normalize_phase(phase_raw);
-  const char c = phase.empty() ? 'a' : phase[0];
-  if (c == 'a') return id(phase_a_voltage).state;
-  if (c == 'b') return id(phase_b_voltage).state;
-  if (c == 'c') return id(phase_c_voltage).state;
-  return id(overall_voltage).state;
-}
-
-// Backfeed handling: callers pass a bool `backfeed` (true means backfeed into the circuit is allowed).
+// Backfeed handling: callers pass a bool backfeed (true means backfeed into the circuit is allowed).
 // If backfeed is false and the value is negative, clamp it to 0.0f.
 inline float backfeedable(bool backfeed, float value) {
   if (!backfeed && value < 0.0f) return 0.0f;
   return value;
 }
+
