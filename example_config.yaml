@@ -107,8 +107,6 @@ button:
 
 ##################################################################
 esphome:
-  name: "${name}"
-  friendly_name: ${friendly_name}
   area: "Electrical Panel"
 #################################
   devices:
