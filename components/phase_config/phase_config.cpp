@@ -23,7 +23,7 @@ std::string PhaseConfig::normalize_phase(std::string phase) {
 }
 
 float PhaseConfig::voltage_by_phase(const std::string &phase_raw) const {
-  const std::string phase = normalize_phase(phase_raw);
+  const std::string phase = normalize_phase_(phase_raw);
 
   if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
   if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
@@ -38,7 +38,7 @@ float PhaseConfig::voltage_by_phase(const std::string &phase_raw) const {
 }
 
 float PhaseConfig::single_phase_voltage(const std::string &phase_raw) const {
-  const std::string phase = normalize_phase(phase_raw);
+  const std::string phase = normalize_phase_(phase_raw);
   const char c = phase.empty() ? 'a' : phase[0];
 
   if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
