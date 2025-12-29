@@ -12,8 +12,9 @@ sensor:
         float sq_a = pow(id(phase_a_voltage).state, 2);
         float sq_b = pow(id(phase_b_voltage).state, 2);
         float sq_c = pow(id(phase_c_voltage).state, 2);
-        bool disabled = "${ct_c.disable}";
-        return disabled ? a + b : sqrt(sq_a + sq_b + sq_c);
+        # bool disabled = "${ct_c.disable}";
+        bool disabled = id(ct_c.disable).state;
+        return disabled ? sum(a, b) : sqrt(sum(sq_a, sq_b, sq_c));
     update_interval: never
     device_class: voltage
     state_class: measurement
