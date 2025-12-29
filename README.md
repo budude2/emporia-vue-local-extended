@@ -100,7 +100,7 @@ Each clamp must be configured from the following options:
 |------------|---------------------------|--------------------------------------------------------------------------------------------------|
 | `disable`  | `"true"`, `"false"`       | Marks the sensor as internal so all related measurement and calculations are ignored (must be in quotes due to ESPHome parsing inconsistencies)          |
 | `backfeed` | `"true"`, `"false"`       | Allows or clamps negative sensor values (also must be in quotes)                                 |
-| `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc` | Sets the voltage reference for the measurement                                             |
+| `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement               |
 | `clamp_on` | `phase_a`, `phase_b`, `phase_c` | Specifies the physical phase where the clamp is actually installed (i.e. a split phase measurement across A and B with the clamp on phase_b    |
 
 ## Some Math
@@ -110,12 +110,12 @@ Each clamp must be configured from the following options:
 ```
 #### Real Current
 ```math
-\frac{W_{\text{actual}}}{V} = A_{\text{real}}
+\frac{W_{\text{actual}}}{V_{\text{phase}}} = A_{\text{real}}
 ```
 #### Apparent Power
 - Interesting note is that we don't use the Phase Angle in any calculations because the Atmega does that already to calculate the Real Power
 ```math
-\times A_{\text{apparent}} = \text{VA}
+V_{\text{phase}} * A_{\text{apparent}} = \text{VA}
 ```
 #### Power Factor
 ```math
