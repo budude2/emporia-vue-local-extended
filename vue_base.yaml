@@ -7,11 +7,11 @@ external_components:
     components:
       - emporia_vue
 
-  - source:
-      type: git
-      url: https://github.com/Legot/emporia-vue-local-extended
-    components:
-      - emporia-vue-extended
+  # - source:
+  #     type: git
+  #     url: https://github.com/Legot/emporia-vue-local-extended
+  #   components:
+  #     - emporia-vue-extended
 
 packages:
   - !include sensors/apparent_current.yaml
