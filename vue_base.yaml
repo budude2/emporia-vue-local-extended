@@ -23,15 +23,16 @@ phase_config: # Do Not edit here. Edit the substitutions.
   phase_c_voltage: phase_c_voltage
 
 packages:
-  - !include sensors/apparent_current.yaml
-  - !include sensors/apparent_power.yaml
-  - !include sensors/daily_energy.yaml
+  - !include sensors/inputs.yaml
   - !include sensors/grid_sensors.yaml
-  - !include sensors/power_factor.yaml
+  - !include sensors/voltage.yaml
+  - !include sensors/apparent_current.yaml
   - !include sensors/real_current.yaml
   - !include sensors/real_power.yaml
-  - !include sensors/voltage.yaml
-  - !include sensors/inputs.yaml
+  - !include sensors/apparent_power.yaml
+  - !include sensors/power_factor.yaml
+  - !include sensors/time.yaml
+  - !include sensors/daily_energy.yaml
 
 esphome:
   name: ${name}
@@ -94,3 +95,8 @@ i2c:
   frequency: 400kHz  # recommended range is 50-200kHz
   timeout: 1ms #https://github.com/esphome/issues/issues/6335#issuecomment-2418437672
   id: i2c_a
+
+
+button:
+  - platform: safe_mode
+    name: "Safe Mode Restart"
