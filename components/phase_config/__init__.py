@@ -79,4 +79,4 @@ async def to_code(config):
 
     if CONF_PHASE_ABC_VOLTAGE in config:
         ac = await cg.get_variable(config[CONF_PHASE_ABC_VOLTAGE])
-        cg.add(var.set_phase_a_c_voltage(abc))
+        cg.add(var.set_phase_a_b_c_voltage(abc))
