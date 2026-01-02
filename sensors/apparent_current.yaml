@@ -8,13 +8,44 @@ sensor:
   - &template_apparentcurrent
     platform: template
     id: total_apparentcurrent
-    # lambda: 'float rss = pow(id(phase_a_apparentcurrent).state, 2) + pow(id(phase_b_apparentcurrent).state, 2) + pow(id(phase_c_apparentcurrent).state, 2); bool disabled = "${ct_c.disable}"; return disabled ? rss * sqrtf(2.0f) : rss * sqrtf(3.0f);'
+    # lambda: |-
+    #     float sq_a = pow(id(phase_a_apparentcurrent).state, 2);
+    #     float sq_b = pow(id(phase_b_apparentcurrent).state, 2);
+    #     float sq_c = pow(id(phase_c_apparentcurrent).state, 2);
+    #     bool disabled = "${ct_c.disable}";
+    #     return disabled ? sqrt(sq_a + sq_b) : sqrt(sq_a + sq_b + sq_c);
     lambda: |-
-        float sq_a = pow(id(phase_a_apparentcurrent).state, 2);
-        float sq_b = pow(id(phase_b_apparentcurrent).state, 2);
-        float sq_c = pow(id(phase_c_apparentcurrent).state, 2);
+        float Ia = id(phase_a_apparentcurrent).state;
+        float Ib = id(phase_b_apparentcurrent).state;
+        float Ic = id(phase_c_apparentcurrent).state;
+        float thetaA = id(phase_a_angle).state;
+        float thetaB = id(phase_b_angle).state;
+        float thetaC = id(phase_c_angle).state;
+    
         bool disabled = "${ct_c.disable}";
-        return disabled ? sqrt(sq_a + sq_b) : cbrt(sq_a + sq_b + sq_c);
+    
+        float total_current;
+    
+        if (disabled) {
+            // Two-phase circuit
+            float cosA = cos(thetaA);
+            float sinA = sin(thetaA);
+            float cosB = cos(thetaB);
+            float sinB = sin(thetaB);
+            total_current = sqrt(pow(Ia * cosA + Ib * cosB, 2) + pow(Ia * sinA + Ib * sinB, 2));
+        } else {
+            // Three-phase circuit
+            float cosA = cos(thetaA);
+            float sinA = sin(thetaA);
+            float cosB = cos(thetaB);
+            float sinB = sin(thetaB);
+            float cosC = cos(thetaC);
+            float sinC = sin(thetaC);
+            total_current = sqrt(pow(Ia * cosA + Ib * cosB + Ic * cosC, 2) + pow(Ia * sinA + Ib * sinB + Ic * sinC, 2));
+        }
+        
+        return total_current;
+
     update_interval: never
     device_class: current
     state_class: measurement
