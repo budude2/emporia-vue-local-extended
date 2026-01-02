@@ -17,6 +17,7 @@ sensor:
   - platform: template
     device_id: grid_service
     lambda: return 0;
+    id: phase_b_angle
     internal: ${ct_b.disable}
 
   - <<: *copy_grid_sensor
