@@ -11,16 +11,25 @@ sensor:
     name: "Phase Angle A-B"
     internal: ${ct_a.disable}
 
+    ##########################################
+    # Phase B is the reference sensor for Frequency and Phase Angle
+    # It is the only one with Frequency and has a Phase Angle of 0 defined
+  - platform: template
+    device_id: grid_service
+    lambda: return 0;
+    internal: ${ct_b.disable}
+
   - <<: *copy_grid_sensor
     source_id: frequency
     name: "Frequency"
     internal: ${ct_b.disable}
-
+    ##########################################
+    
   - <<: *copy_grid_sensor
     source_id: phase_c_angle
     name: "Phase Angle B-C"
     internal: ${ct_c.disable}
-  
+
 ## Phase Voltages  ##
   - <<: *copy_grid_sensor
     source_id: overall_voltage
