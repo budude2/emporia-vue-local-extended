@@ -55,32 +55,32 @@ substitutions:
   energy_update_rate: 60s    # should be at least 2x the sensor_update_rate
 
   # Configuration for each CT clamp
-  ct_a:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_b:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_c:  {disable:  "true", backfeed: "false", phase: c,  clamp_on: phase_c}
-  ct_1:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_2:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_3:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_4:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_5:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_6:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_7:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_8:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_9:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_10: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_11: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_12: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_13: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_14: {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_15: {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_16: {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
+  ct_a:  { disable: "false", backfeed: "false", phase: a  }
+  ct_b:  { disable: "false", backfeed: "false", phase: b  }
+  ct_c:  { disable:  "true", backfeed: "false", phase: c  }
+  ct_1:  { disable: "false", backfeed: "false", phase: ab }
+  ct_2:  { disable: "false", backfeed: "false", phase: a  }
+  ct_3:  { disable: "false", backfeed: "false", phase: b  }
+  ct_4:  { disable: "false", backfeed: "false", phase: a  }
+  ct_5:  { disable: "false", backfeed: "false", phase: b  }
+  ct_6:  { disable: "false", backfeed: "false", phase: a  }
+  ct_7:  { disable: "false", backfeed: "false", phase: b  }
+  ct_8:  { disable: "false", backfeed: "false", phase: a  }
+  ct_9:  { disable: "false", backfeed: "false", phase: b  }
+  ct_10: { disable: "false", backfeed: "false", phase: a  }
+  ct_11: { disable: "false", backfeed: "false", phase: b  }
+  ct_12: { disable: "false", backfeed: "false", phase: a  }
+  ct_13: { disable: "false", backfeed: "false", phase: b  }
+  ct_14: { disable: "false", backfeed: "false", phase: ab }
+  ct_15: { disable: "false", backfeed: "false", phase: ab }
+  ct_16: { disable: "false", backfeed: "false", phase: ab }
 ```
 #### Current Clamp Configuration
 
 Each Current Clamp has an entry in the substitutions section shown as single line yaml dictionaries.
 ```yaml
 substitutions:
-  ct_1:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
+  ct_1:  { disable: "false", backfeed: "false", phase: ab }
 ```
 Alternatively this can be represented as standard multiline yaml.
 ```yaml
@@ -89,7 +89,6 @@ substitutions:
     disable: "false"
     backfeed: "false"
     phase: a
-    clamp_on: phase_a
 ```
 Each clamp must be configured from the following options:
 
@@ -97,8 +96,7 @@ Each clamp must be configured from the following options:
 |------------|---------------------------|--------------------------------------------------------------------------------------------------|
 | `disable`  | `"true"`, `"false"`       | Marks the sensor as internal so all related measurement and calculations are ignored (must be in quotes due to ESPHome parsing inconsistencies)          |
 | `backfeed` | `"true"`, `"false"`       | Allows or clamps negative sensor values (also must be in quotes)                                 |
-| `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc`, `abc` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement, accepts permutations of the phase ordering, correct phase ordering here improves accuracy slightly and will be required when the clamp_on: substitution is retired|
-| `clamp_on` | `phase_a`, `phase_b`, `phase_c` | Specifies the physical phase where the clamp is actually installed (i.e. a split phase measurement across A and B with the clamp on phase_b (hopefully, this will be retired soon in favor of phase: letter ordering) |
+| `phase`    | `a`, `b`, `c`, `ab`/`ba`, `ac`/`ca`, `bc`/`cb`, `abc`/`acb`/`bac`/`bca`/`cab`/`cba` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement, accepts permutations of the phase ordering, correct phase ordering here improves accuracy. **The first letter in the phase must be which phase the clamp is installed on.**|
 
 ## Some Math used for the sensors
 #### Real Power
