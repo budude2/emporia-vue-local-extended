@@ -21,25 +21,25 @@ substitutions:
   energy_update_rate: 60s    # should be at least 2x the sensor_update_rate
 
   # Configuration for each CT clamp
-  ct_a:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_b:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_c:  {disable:  "true", backfeed: "false", phase: c,  clamp_on: phase_c}
-  ct_1:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_2:  {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_3:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_4:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_5:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_6:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_7:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_8:  {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_9:  {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_10: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_11: {disable:  "true", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_12: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
-  ct_13: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_14: {disable: "false", backfeed: "false", phase: ab, clamp_on: phase_a}
-  ct_15: {disable: "false", backfeed: "false", phase: a,  clamp_on: phase_a}
-  ct_16: {disable: "false", backfeed: "false", phase: b,  clamp_on: phase_b}
+  ct_a:  { disable: "false", backfeed: "false", phase: a  }
+  ct_b:  { disable: "false", backfeed: "false", phase: b  }
+  ct_c:  { disable:  "true", backfeed: "false", phase: c  }
+  ct_1:  { disable: "false", backfeed: "false", phase: ab }
+  ct_2:  { disable: "false", backfeed: "false", phase: ab }
+  ct_3:  { disable: "false", backfeed: "false", phase: a  }
+  ct_4:  { disable: "false", backfeed: "false", phase: b  }
+  ct_5:  { disable: "false", backfeed: "false", phase: a  }
+  ct_6:  { disable: "false", backfeed: "false", phase: b  }
+  ct_7:  { disable: "false", backfeed: "false", phase: a  }
+  ct_8:  { disable: "false", backfeed: "false", phase: b  }
+  ct_9:  { disable: "false", backfeed: "false", phase: a  }
+  ct_10: { disable: "false", backfeed: "false", phase: b  }
+  ct_11: { disable:  "true", backfeed: "false", phase: a  }
+  ct_12: { disable: "false", backfeed: "false", phase: b  }
+  ct_13: { disable: "false", backfeed: "false", phase: a  }
+  ct_14: { disable: "false", backfeed: "false", phase: ab }
+  ct_15: { disable: "false", backfeed: "false", phase: a  }
+  ct_16: { disable: "false", backfeed: "false", phase: b  }
 
 
 
