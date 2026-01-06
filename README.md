@@ -97,8 +97,8 @@ Each clamp must be configured from the following options:
 |------------|---------------------------|--------------------------------------------------------------------------------------------------|
 | `disable`  | `"true"`, `"false"`       | Marks the sensor as internal so all related measurement and calculations are ignored (must be in quotes due to ESPHome parsing inconsistencies)          |
 | `backfeed` | `"true"`, `"false"`       | Allows or clamps negative sensor values (also must be in quotes)                                 |
-| `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc`, `abc` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement               |
-| `clamp_on` | `phase_a`, `phase_b`, `phase_c` | Specifies the physical phase where the clamp is actually installed (i.e. a split phase measurement across A and B with the clamp on phase_b    |
+| `phase`    | `a`, `b`, `c`, `ab`, `ac`, `bc`, `abc` | Sets the voltage phase or crossphase (for split-phase circuts) for the measurement, accepts permutations of the phase ordering, correct phase ordering here improves accuracy slightly and will be required when the clamp_on: substitution is retired|
+| `clamp_on` | `phase_a`, `phase_b`, `phase_c` | Specifies the physical phase where the clamp is actually installed (i.e. a split phase measurement across A and B with the clamp on phase_b (hopefully, this will be retired soon in favor of phase: letter ordering) |
 
 ## Some Math used for the sensors
 #### Real Power
