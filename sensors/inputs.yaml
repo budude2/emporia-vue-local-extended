@@ -60,133 +60,133 @@ sensor:
       ## CT Clamp Configuration ##
       #########################
       
-      - phase_id: ${ct_a.clamp_on}
+      - phase_id: ${clamp_on.ct_a}
         input: "A"
         power:
           id: phase_a_powermeas
         current:
           id: phase_a_apparentcurrent
 
-      - phase_id: ${ct_b.clamp_on}
+      - phase_id: ${clamp_on.ct_b}
         input: "B"
         power:
           id: phase_b_powermeas
         current:
           id: phase_b_apparentcurrent
 
-      - phase_id: ${ct_c.clamp_on}
+      - phase_id: ${clamp_on.ct_c}
         input: "C"
         power:
           id: phase_c_powermeas
         current:
           id: phase_c_apparentcurrent
 
-      - phase_id: ${ct_1.clamp_on}
+      - phase_id: ${clamp_on.ct_1}
         input: "1"
         power:
           id: cir1_powermeas
         current:
           id: cir1_apparentcurrent
 
-      - phase_id: ${ct_2.clamp_on}
+      - phase_id: ${clamp_on.ct_2}
         input: "2"
         power:
           id: cir2_powermeas
         current:
           id: cir2_apparentcurrent
 
-      - phase_id: ${ct_3.clamp_on}
+      - phase_id: ${clamp_on.ct_3}
         input: "3"
         power:
           id: cir3_powermeas
         current:
           id: cir3_apparentcurrent
 
-      - phase_id: ${ct_4.clamp_on}
+      - phase_id: ${clamp_on.ct_4}
         input: "4"
         power:
           id: cir4_powermeas
         current:
           id: cir4_apparentcurrent
 
-      - phase_id: ${ct_5.clamp_on}
+      - phase_id: ${clamp_on.ct_5}
         input: "5"
         power:
           id: cir5_powermeas
         current:
           id: cir5_apparentcurrent
 
-      - phase_id: ${ct_6.clamp_on}
+      - phase_id: ${clamp_on.ct_6}
         input: "6"
         power:
           id: cir6_powermeas
         current:
           id: cir6_apparentcurrent
 
-      - phase_id: ${ct_7.clamp_on}
+      - phase_id: ${clamp_on.ct_7}
         input: "7"
         power:
           id: cir7_powermeas
         current:
           id: cir7_apparentcurrent
 
-      - phase_id: ${ct_8.clamp_on}
+      - phase_id: ${clamp_on.ct_8}
         input: "8"
         power:
           id: cir8_powermeas
         current:
           id: cir8_apparentcurrent
 
-      - phase_id: ${ct_9.clamp_on}
+      - phase_id: ${clamp_on.ct_9}
         input: "9"
         power:
           id: cir9_powermeas
         current:
           id: cir9_apparentcurrent
 
-      - phase_id: ${ct_10.clamp_on}
+      - phase_id: ${clamp_on.ct_10}
         input: "10"
         power:
           id: cir10_powermeas
         current:
           id: cir10_apparentcurrent
 
-      - phase_id: ${ct_11.clamp_on}
+      - phase_id: ${clamp_on.ct_11}
         input: "11"
         power:
           id: cir11_powermeas
         current:
           id: cir11_apparentcurrent
 
-      - phase_id: ${ct_12.clamp_on}
+      - phase_id: ${clamp_on.ct_12}
         input: "12"
         power:
           id: cir12_powermeas
         current:
           id: cir12_apparentcurrent
 
-      - phase_id: ${ct_13.clamp_on}
+      - phase_id: ${clamp_on.ct_13}
         input: "13"
         power:
           id: cir13_powermeas
         current:
           id: cir13_apparentcurrent
 
-      - phase_id: ${ct_14.clamp_on}
+      - phase_id: ${clamp_on.ct_14}
         input: "14"
         power:
           id: cir14_powermeas
         current:
           id: cir14_apparentcurrent
 
-      - phase_id: ${ct_15.clamp_on}
+      - phase_id: ${clamp_on.ct_15}
         input: "15"
         power:
           id: cir15_powermeas
         current:
           id: cir15_apparentcurrent
 
-      - phase_id: ${ct_16.clamp_on}
+      - phase_id: ${clamp_on.ct_16}
         input: "16"
         power:
           id: cir16_powermeas
