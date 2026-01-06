@@ -25,13 +25,13 @@ std::string PhaseConfig::normalize_phase_(std::string phase) {
 float PhaseConfig::voltage_by_phase(const std::string &phase_raw) const {
   const std::string phase = normalize_phase_(phase_raw);
 
-  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
-  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
-  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_a_c_voltage_->state;
-
   if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
   if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
   if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
+  
+  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
+  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
+  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_a_c_voltage_->state;
 
   if (phase == "abc" && phase_a_b_c_voltage_ != nullptr) return phase_a_b_c_voltage_->state;
 
@@ -46,7 +46,13 @@ float PhaseConfig::single_phase_voltage(const std::string &phase_raw) const {
   if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
   if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
   if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
+  
+  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_voltage_->state;
+  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_voltage_->state;
+  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_c_voltage_->state;
 
+  if (phase == "abc" && phase_a_b_c_voltage_ != nullptr) return phase_a_voltage_->state;
+  
   if (overall_voltage_ != nullptr ) return overall_voltage_->state;
   return NAN;
 }
