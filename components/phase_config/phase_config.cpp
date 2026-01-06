@@ -22,39 +22,34 @@ std::string PhaseConfig::normalize_phase_(std::string phase) {
   return phase;
 }
 
+// voltage_by_phase  sorts the phase configuration letters alphabetically and outputs the overall voltage for the configured phases
 float PhaseConfig::voltage_by_phase(const std::string &phase_raw) const {
-  const std::string phase = normalize_phase_(phase_raw);
+    std::string phase = normalize_phase_(phase_raw);
+    std::sort(phase.begin(), phase.end());
 
-  if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
-  if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
-  if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
-  
-  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
-  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
-  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_a_c_voltage_->state;
+    if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
+    if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
+    if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
 
-  if (phase == "abc" && phase_a_b_c_voltage_ != nullptr) return phase_a_b_c_voltage_->state;
+    if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_b_voltage_->state;
+    if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_a_c_voltage_->state;
+    if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_c_voltage_->state;
 
-  if (overall_voltage_ != nullptr ) return overall_voltage_->state;
-  return NAN;
+    if (phase == "abc" && phase_a_c_voltage_ != nullptr) return phase_a_b_c_voltage_->state;
+
+    return NAN;
 }
 
+// single_phase_voltage takes the first letter of the configured phase and returns that voltage
+// this is in preparation for removing the clamp_on: substitution in favor of phase: ordering
 float PhaseConfig::single_phase_voltage(const std::string &phase_raw) const {
-  const std::string phase = normalize_phase_(phase_raw);
-  const char c = phase.empty() ? 'a' : phase[0];
+    std::string phase = normalize_phase_(phase_raw).substr(0, 1); // Get the first character
 
-  if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
-  if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
-  if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
-  
-  if (phase == "ab" && phase_a_b_voltage_ != nullptr) return phase_a_voltage_->state;
-  if (phase == "bc" && phase_b_c_voltage_ != nullptr) return phase_b_voltage_->state;
-  if (phase == "ac" && phase_a_c_voltage_ != nullptr) return phase_c_voltage_->state;
+    if (phase == "a" && phase_a_voltage_ != nullptr) return phase_a_voltage_->state;
+    if (phase == "b" && phase_b_voltage_ != nullptr) return phase_b_voltage_->state;
+    if (phase == "c" && phase_c_voltage_ != nullptr) return phase_c_voltage_->state;
 
-  if (phase == "abc" && phase_a_b_c_voltage_ != nullptr) return phase_a_voltage_->state;
-  
-  if (overall_voltage_ != nullptr ) return overall_voltage_->state;
-  return NAN;
+    return NAN;
 }
 
 } // namespace phase_config
