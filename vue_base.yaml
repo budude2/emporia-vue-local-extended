@@ -25,6 +25,9 @@ phase_config: # Do Not edit here. Edit the substitutions.
 
 substitutions:
   clamp_on:
+    phasea: 'phase_${ct_a.phase[0:1]}
+    phaseb: 'phase_${ct_b.phase[0:1]}
+    phasec: 'phase_${ct_c.phase[0:1]}
     cir1:   'phase_${ct_1.phase[0:1]}
     cir2:   'phase_${ct_2.phase[0:1]}
     cir3:   'phase_${ct_3.phase[0:1]}
