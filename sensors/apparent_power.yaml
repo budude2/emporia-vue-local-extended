@@ -27,7 +27,7 @@ sensor:
 #####################################
   - <<: *template_apparentpower
     id: cir1_apparentpower
-    lambda: 'return backfeedable(${ct_1.backfeed}, id(cir1_apparentcurrent).state * voltage_by_phase("${ct_1.phase}"));' 
+    lambda: 'return backfeedable(${ct_1.backfeed}, invert(${ct_1.invert}, id(cir1_apparentcurrent).state * voltage_by_phase("${ct_1.phase}")));' 
 
   - <<: *template_apparentpower
     id: cir2_apparentpower
