@@ -75,3 +75,8 @@ inline float backfeedable(bool backfeed, float value) {
   if (!backfeed && value < 0.0f) return 0.0f;
   return value;
 }
+
+inline float invert(bool invert, float value) {
+  if (invert) return -value;
+  return value;
+}
