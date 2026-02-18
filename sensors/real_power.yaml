@@ -34,9 +34,7 @@
 
   - <<: *template_realpower
     id: cir1_realpower
-    lambda: |-
-      ESP_LOGD("cir1_realpower", "%f", invert(${ct_1.invert}, id(cir1_powermeas).state / single_phase_voltage("${ct_1.phase}") * voltage_by_phase("${ct_1.phase}")));
-      return backfeedable(${ct_1.backfeed}, invert(${ct_1.invert}, id(cir1_powermeas).state / single_phase_voltage("${ct_1.phase}") * voltage_by_phase("${ct_1.phase}")));
+    lambda: 'return backfeedable(${ct_1.backfeed}, invert(${ct_1.invert}, id(cir1_powermeas).state / single_phase_voltage("${ct_1.phase}") * voltage_by_phase("${ct_1.phase}")));'
 
 
   - <<: *template_realpower
