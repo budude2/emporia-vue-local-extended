@@ -28,7 +28,10 @@ sensor:
 
   - <<: *template_powerfactor
     id: cir1_powerfactor
-    lambda: return id(cir1_realpower).state  /  id(cir1_apparentpower).state;
+    lambda: |-
+      ESP_LOGD("cir1_realpower", "%f", id(cir1_realpower).state);
+      ESP_LOGD("cir1_apparentpower", "%f", id(cir1_apparentpower).state);
+      return id(cir1_realpower).state  /  id(cir1_apparentpower).state;
 
 
   - <<: *template_powerfactor
