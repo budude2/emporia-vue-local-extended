@@ -30,7 +30,7 @@
 
   - <<: *template_realcurrent
     id: cir1_realcurrent
-    lambda: 'return backfeedable(${ct_1.backfeed}, id(cir1_powermeas).state / voltage_by_phase("${ct_1.phase}"));'
+    lambda: 'return backfeedable(${ct_1.backfeed}, invert(${ct_1.invert}, id(cir1_powermeas).state / voltage_by_phase("${ct_1.phase}")));'
 
 
   - <<: *template_realcurrent
