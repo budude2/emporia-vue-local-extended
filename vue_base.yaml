@@ -112,13 +112,11 @@ status_led:
     inverted: True
 
 i2c:
-  sda:
-    number: 5
-    ignore_strapping_warning: true
-  scl: 18
+  sda: 21
+  scl: 22
   scan: false
-  frequency: 400kHz
-  timeout: 1ms
+  frequency: 400kHz  # recommended range is 50-200kHz
+  timeout: 1ms #https://github.com/esphome/issues/issues/6335#issuecomment-2418437672
   id: i2c_a
 
 button:
