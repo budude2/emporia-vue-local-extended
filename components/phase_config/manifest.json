@@ -2,6 +2,6 @@
   "domain": "phase_config",
   "name": "Phase Config Helpers",
   "version": "1.0.0",
-  "documentation": "https://github.com/budude2/emporia-vue-local-extended"
+  "documentation": "https://github.com/Legot/emporia-vue-local-extended"
   "dependencies": ["sensor"]
 }
