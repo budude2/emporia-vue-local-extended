@@ -118,8 +118,7 @@ i2c:
   frequency: 400kHz  # recommended range is 50-200kHz
   timeout: 1ms #https://github.com/esphome/issues/issues/6335#issuecomment-2418437672
   id: i2c_a
-
-
+  
 button:
   - platform: safe_mode
     name: "Safe Mode Restart"
