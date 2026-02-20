@@ -190,3 +190,4 @@
     device_id: cir16
     source_id: cir16_realpower
     internal: ${ct_16.disable}
+
