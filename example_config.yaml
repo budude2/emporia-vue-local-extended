@@ -24,22 +24,22 @@ substitutions:
   ct_a:  { disable: "false", backfeed: "false", phase: a  }
   ct_b:  { disable: "false", backfeed: "false", phase: b  }
   ct_c:  { disable:  "true", backfeed: "false", phase: c  }
-  ct_1:  { disable: "false", backfeed: "false", phase: ab }
-  ct_2:  { disable: "false", backfeed: "false", phase: ab }
-  ct_3:  { disable: "false", backfeed: "false", phase: a  }
-  ct_4:  { disable: "false", backfeed: "false", phase: b  }
-  ct_5:  { disable: "false", backfeed: "false", phase: a  }
-  ct_6:  { disable: "false", backfeed: "false", phase: b  }
-  ct_7:  { disable: "false", backfeed: "false", phase: a  }
-  ct_8:  { disable: "false", backfeed: "false", phase: b  }
-  ct_9:  { disable: "false", backfeed: "false", phase: a  }
-  ct_10: { disable: "false", backfeed: "false", phase: b  }
-  ct_11: { disable:  "true", backfeed: "false", phase: a  }
-  ct_12: { disable: "false", backfeed: "false", phase: b  }
-  ct_13: { disable: "false", backfeed: "false", phase: a  }
-  ct_14: { disable: "false", backfeed: "false", phase: ab }
-  ct_15: { disable: "false", backfeed: "false", phase: a  }
-  ct_16: { disable: "false", backfeed: "false", phase: b  }
+  ct_1:  { disable: "false", backfeed: "false", phase: ab, invert: false }
+  ct_2:  { disable: "false", backfeed: "false", phase: ab, invert: false }
+  ct_3:  { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_4:  { disable: "false", backfeed: "false", phase: b,  invert: false }
+  ct_5:  { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_6:  { disable: "false", backfeed: "false", phase: b,  invert: false }
+  ct_7:  { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_8:  { disable: "false", backfeed: "false", phase: b,  invert: false }
+  ct_9:  { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_10: { disable: "false", backfeed: "false", phase: b,  invert: false }
+  ct_11: { disable:  "true", backfeed: "false", phase: a,  invert: false }
+  ct_12: { disable: "false", backfeed: "false", phase: b,  invert: false }
+  ct_13: { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_14: { disable: "false", backfeed: "false", phase: ab, invert: false }
+  ct_15: { disable: "false", backfeed: "false", phase: a,  invert: false }
+  ct_16: { disable: "false", backfeed: "false", phase: b,  invert: false }
 
 
 
